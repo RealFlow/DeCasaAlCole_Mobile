@@ -9,6 +9,11 @@ body{
 	background-color:#282c33;
 }
 
+img {
+	height:auto;
+	width: auto;
+}
+
 #content{
 	background-color:#FFFFFF;
 }
@@ -364,6 +369,7 @@ body{
 /*INTRO PAGE*/
 .page-content-intro{
 	background: url(../images/page-intro/intro_bg.png) no-repeat center center;
+	min-height: 100%;
 	background-attachment:fixed;
 	-webkit-background-size: 100%;
 	-moz-background-size: 100%;
@@ -383,10 +389,18 @@ body{
 	font-size:30px;
 }
 .intro-logo img{
-	max-width:40%;
+	max-height:50%;
+	max-width:50%;
 	display: block;
 	margin: auto;
+	vertical-align: middle;
 }
+
+.intro-logo img:active{
+	/*background:url(../images/page-intro/logo_active.png) no-repeat center center;*/
+	content:url(../images/page-intro/logo_active.png);
+}
+
 .intro-logo span{ 
 	display:block;
 	line-height:50px;
