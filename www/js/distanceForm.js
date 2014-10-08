@@ -24,13 +24,8 @@ jQuery(document).ready(function($) {
 		
 	// submit form data starts	   
     function submitData(currentForm, formType){     
-		formSubmitted = 'true';		
-		var formInput = $('#' + currentForm).serialize();		
-		$.post($('#' + currentForm).attr('action'),formInput, function(data){			
-			$('#' + currentForm).hide();
-			$('#formSuccessMessageWrap').fadeIn(500);			
-		});
-
+		// formSubmitted = 'true';
+		distance.requestDistance();
 	};
 	// submit form data function starts	
 	// validate form function starts
@@ -44,18 +39,28 @@ jQuery(document).ready(function($) {
 				$(this).val($(this).attr('data-dummy'));	
 				$(this).focus();
 				$(this).addClass('fieldHasError');
-				$('#' + $(this).attr('id') + 'Error').fadeIn(300);
+				$('#' + $(this).attr('id') + 'ErrorEmpty').fadeIn(300);
 				return false;					   
 			};			
-			if($(this).hasClass('requiredEmailField')){				  
-				var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-				var tempField = '#' + $(this).attr('id');				
-				if(!emailReg.test($(tempField).val())) {
-					$(tempField).focus();
-					$(tempField).addClass('fieldHasError');
-					$(tempField + 'Error2').fadeIn(300);
+			if($(this).hasClass('requiredPostalCodeField')){
+				var cpText = $(this).val();
+				var isnum = /^\d+$/.test(cpText);
+				if (isnum) {
+					var cpLength = cpText.length;
+					if(cpLength != 5){
+						$(this).val($(this).attr('data-dummy'));	
+						$(this).focus();
+						$(this).addClass('fieldHasError');
+						$('#' + $(this).attr('id') + 'ErrorLength').fadeIn(300);
+						return false;					   
+					}
+				} else {
+					$(this).val($(this).attr('data-dummy'));	
+					$(this).focus();
+					$(this).addClass('fieldHasError');
+					$('#' + $(this).attr('id') + 'ErrorCharacter').fadeIn(300);
 					return false;
-				};			
+				}
 			};			
 			if(formSubmitted == 'false' && i == $('#' + currentForm + ' .requiredField').length - 1){
 			 	submitData(currentForm, formType);

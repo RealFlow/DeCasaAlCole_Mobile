@@ -59,6 +59,32 @@ License Restrictions: You are not allowed to remove these comments, or take cred
 	font-style:normal;
 }
 
+#preloaderRequest {
+	position:relative;
+	z-index:2500;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	background-color:#fff; 
+	z-index:999999; 
+}
+
+#statusRequest {
+	position:fixed;
+	z-index:999999;
+	width:250px;
+	height:250px;
+	position:absolute;
+	left:50%; 
+	top:50%; 
+	background-image:url(../images/status.gif); 
+	background-size:32px 32px;
+	background-repeat:no-repeat;
+	background-position:center;
+	margin:-125px 0 0 -125px; 
+}
+
 /*///////////////////////////////////////////////////////////////////////////////*/
 /*///////////////////////////////////////////////////////////////////////////////*/
 /*-----------------------BASIC TYPOGRAPHY STYLES---------------------------------*/
@@ -637,6 +663,18 @@ table tr:hover td{
 /*//////////////////////////////////////////////////////////////////////////////////////*/
 /*-----------------------------CSS3 Buttons---------------------------------------------*/
 /*//////////////////////////////////////////////////////////////////////////////////////*/
+
+/*.button-right{
+	display: inline;
+	float: right;
+}*/
+
+.button-align-right{
+	margin-left:20px; 
+	margin-right:20px;
+	float: right;
+}
+
 .button-minimal2{
 	border-radius:1px!important;
 }
@@ -775,6 +813,32 @@ table tr:hover td{
 	background-color: #bbcbd8;
 }
 .gblue-minimal:active {border: 1px solid #434f5a;}
+
+/* The styles for the white button */
+.white-minimal {
+	color: #2C3E50;
+	border: 1px solid #febf4d;
+	background-color: #fff;
+}
+/*.white-minimal:hover {
+	border: 1px solid #c1913d;
+
+	background-color: #febf4d;
+}*/
+.white-minimal:active {border: 1px solid #febf4d;}
+
+/* The styles for the white button */
+.transparent-minimal {
+	color: #fff;
+	border: 1px solid #fff;
+	background-color: rgba(ffff);
+}
+.transparent-minimal:hover {
+	border: 2px solid #febf4d;
+
+	background-color: rgba(ffff);
+}
+.transparent-minimal:active {border: 2px solid #febf4d;}
 
 
 
@@ -1178,7 +1242,7 @@ table tr:hover td{
 .green-notification{	background-color: rgba(60, 167, 48, 0.3);	border-radius:5px;	}
 .green-notification a{	padding: 10px 10px;	font-size:10px;	color:#060;	float:right;}
 
-.red-notification{		background-color: rgba(219, 84, 84, 0.5);	border-radius:5px;	}
+.red-notification{		background-color: rgba(219, 84, 84, 0.2);	border-radius:5px;}
 .red-notification a{	padding: 10px 10px;	font-size:10px;	color:#C00;	float:right;}
 
 .blue-notification{		background-color: rgba(100, 155, 174, 0.5);	border-radius:5px;	}
@@ -1747,7 +1811,7 @@ table tr:hover td{
 	padding-right:20px;
 	padding-top:10px;
 	padding-bottom:10px;
-	background-color: #FCFFD6;
+	background-color: #F7EAAE;
 	border-style: solid;
     border-width: 1px 1px 0px;
     border-color: #cacaca 

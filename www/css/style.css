@@ -127,7 +127,11 @@ img {
 	background-color:#282c33;
 	z-index:10;
 	display:block;
-	min-height:580px;
+	min-height:100%;
+
+	/*min-height: 100%;
+    height: auto !important;
+    height: 100%;*/
 }
 
 .page-content-wrapper{
@@ -468,3 +472,14 @@ img {
 .page-content-tests {
 	
 }
+
+.page-content-results-school {
+	margin-top: 20px;
+	margin-bottom: 80px;
+}
+
+.results-heading {
+	font-size: 30px;
+	line-height: 30px;
+}
+

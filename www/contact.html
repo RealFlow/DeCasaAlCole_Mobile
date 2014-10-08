@@ -8,7 +8,7 @@
         <link rel="stylesheet" type="text/css" href="css/index.css" />
         <meta name="msapplication-tap-highlight" content="no" />
 
-        <title>Distances</title>
+        <title>Contact</title>
 
         <!-- Stylesheet Load -->
         <link href="css/style.css"               rel="stylesheet" type="text/css">
@@ -22,19 +22,11 @@
 
     </head>
     <body>
-<!--         <div class="app">
-            <h1>Apache Cordova</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
-            </div>
-        </div> -->
-
 
     <div id="preloader">
         <div id="status">
             <p class="center-text">
-                Estamos procesando tu consulta...
+                Cargando el contenido...
                 <em>La carga dependerá de tu conexión a internet!</em>
             </p>
         </div>
@@ -55,7 +47,7 @@
             <p class="sidebar-separator">NAVEGACIÓN</p>
             <a href="index.html" class="nav-item home-nav">                     INICIO      <em class="nav-onit"></em></a>
            
-            <a href="contact.html" class="nav-item contact-nav no-border">      CONTACTO     <em class="nav-page"></em></a>
+            <a href="distance.html" class="nav-item contact-nav no-border">      DISTANCIAS     <em class="nav-page"></em></a>
         </div>
     </div>
        
@@ -71,27 +63,39 @@
         <div id="page-content-main">
 
         <div class="page-content-distance container no-bottom">
-
-            <h1>Distancias</h1>
             
-            <form class="contactForm" id="distanceForm" >
+            <h1>Contacto</h1>
+
+
+            <div class="formSuccessMessageWrap" id="formSuccessMessageWrap">
+                <div class="notification-box green-box">
+                    <h4>Mensaje enviado!</h4>
+                    <a href="#" class="close-notification">x</a>
+                    <div class="clear"></div>
+                    <p>
+                        Tu mensaje se ha enviado correctamente. En breve nos pondremos en contacto contigo, !gracias!  
+                    </p>  
+                </div> 
+            </div>    
+
+            <form method="POST" class="contactForm" id="contactForm" action="http://forms.brace.io/hola@decasaalcole.com">
                     <fieldset>
 
-                        <div class="formValidationError" id="formPostalCodeInputErrorEmpty">
+                        <div class="formValidationError" id="formContactEmailInputErrorEmpty">
                             <div class="small-notification red-notification">
-                                <p id="fieldErrorMessage">Código Postal obligatorio</p>
+                                <p id="fieldErrorMessage">Email vacío</p>
                             </div>
                         </div>
 
-                        <div class="formValidationError" id="formPostalCodeInputErrorLength">
+                        <div class="formValidationError" id="formContactEmailInputError">
                             <div class="small-notification red-notification">
-                                <p id="fieldErrorMessage">Longitud de código postal distinta de 5</p>
+                                <p id="fieldErrorMessage">Email incorrecto</p>
                             </div>
                         </div>
 
-                        <div class="formValidationError" id="formPostalCodeInputErrorCharacter">
+                        <div class="formValidationError" id="formContactDescriptionInputErrorEmpty">
                             <div class="small-notification red-notification">
-                                <p id="fieldErrorMessage">Carácter incorrecto en código postal</p>
+                                <p id="fieldErrorMessage">Descripción vacía</p>
                             </div>
                         </div>
 
@@ -102,45 +106,35 @@
                         </div>            
                         
                         <div class="formFieldWrap">
-                            <label class="field-title contactNameField">1. Selecciona tu código postal:<span>(obligatorio)</span></label>
-                            <input id="formPostalCodeInput" type="text" name="postalCodeNameField" value="" class="contactField requiredField requiredPostalCodeField" id="contactNameField"/>
+                            <label class="field-title contactNameField">¿Cómo te llamas?:</label>
+                            <input id="formContactNameInput" type="name" name="formContactNameField" value="" class="contactField formContactRequiredNameField" id="contactNameField" placeholder="tu nombre"/>
+                        </div>
+                        <div class="formFieldWrap">
+                            <label class="field-title contactNameField">¿Un email de contacto?:<span>(obligatorio)</span></label>
+                            <input id="formContactEmailInput" type="email" name="formContactEmailField" value="" class="contactField requiredField formContactRequiredEmailField" id="contactEmailField" placeholder="tu@tumismo.es"/>
                         </div>
                         
                         <div class="formFieldWrap">
-                            <label class="field-title contactNameField" for="schoolTypeNameField">2. Filtra por tipo de colegio</label>
-                             <a id="formPublicSchoolChecker" href="#" class="checker checkbox-v1 checked-v1">Público</a>
-                             <a id="formPrivateSchoolChecker" href="#" class="checker checkbox-v1 checked-v1">Privado</a>
+                            <label class="field-title contactNameField" for="schoolTypeNameField">Escríbenos lo que quieras:<span>(obligatorio)</span></label>
+                             <input id="formContactDescriptionInput" type="message" name="formContactDescriptionField" value="" class="contactTextarea requiredField formContactRequiredDescriptionField" id="contactDescriptionField" style="min-height=200px;" placeholder="pienso que..."/>
                         </div>
                         
                         <div class="formSubmitButtonErrorsWrap">
 
-                              <input type="submit" class="buttonWrap button-minimal fullscreen-button yellow-minimal contactSubmitButton" id="contactSubmitButton" value="SUBMIT" data-formId="distanceForm"/> 
+                              <input type="submit" class="buttonWrap button-minimal fullscreen-button yellow-minimal contactSubmitButton" id="contactSubmitButton" value="SUBMIT" data-formId="contactForm"/> 
 
                         </div>
                     </fieldset>
                 </form> 
         </div>
 
-        <div class="page-content-results">
-            <div id="page-content-results-header">
-                <a href="distance.html" class="button-minimal yellow-minimal no-bottom button-align-right" onclick='contact.validateForm()'>Nueva Consulta</a>
-                <p class="uppercase center-text results-heading">Resultados</p>
-                <p id="page-content-results-header-counter" class="uppercase center-text"></p>
-            </div> 
-
-            <div class="page-content-results-school"></div>    
         
-        </div> 
-
-    </div>
 
         <div class="footer">
             <a href="#" class="footer-facebook"></a>
             <a href="#" class="footer-twitter"></a>
             <a href="#" class="footer-up go-up"></a>
-            
-            <a id="paginationNextButton" class="button-minimal transparent-minimal button-align-right" onclick='pagination.next()'>  >>  </a>
-            <a id="paginationPreviousButton" class="button-minimal transparent-minimal button-align-right" onclick='pagination.previous()'>  <<  </a>
+           
             <em></em>
             
         </div>     
@@ -160,7 +154,7 @@
         <script src="js/hammer.js"          type="text/javascript"></script>   
         <script src="js/jquery-ui-min.js"   type="text/javascript"></script>
         <script src="js/subscribe.js"       type="text/javascript"></script>
-        <script src="js/distanceForm.js"         type="text/javascript"></script>
+        <script src="js/contactForm.js"         type="text/javascript"></script>
         <script src="js/jquery.swipebox.js" type="text/javascript"></script>
         <script src="js/bxslider.js"        type="text/javascript"></script>
         <script src="js/colorbox.js"        type="text/javascript"></script>
@@ -173,9 +167,6 @@
 
             layout.adjustLayout();
 
-            $(".page-content-results").hide();
-            $("#paginationNextButton").hide();
-            $("#paginationPreviousButton").hide();
         </script>
  
     </body>

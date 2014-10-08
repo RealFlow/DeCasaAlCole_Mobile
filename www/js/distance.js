@@ -1,26 +1,157 @@
+
+var layout = {
+
+	mainlayoutHeight: 0,
+	adjustLayout: function () {
+
+		var headerHeight = $('.page-header').height();
+		var footerHeight = $('.footer').height();
+		var windowHeight = $(window).height();
+
+		var main = $('#page-content-main');
+		var mainHeight = windowHeight - (headerHeight + footerHeight);
+
+		main.css("min-height", mainHeight);
+		// main.height(mainHeight);
+		this.mainlayoutHeight = mainHeight;
+	},
+	initDropdownLayout: function () {
+		var rowDropdownContainer = 60;
+
+		var headerHeight = 92;
+		var mainHeight = this.mainlayoutHeight - headerHeight;
+
+		var numberOfRows = Math.floor(mainHeight / rowDropdownContainer);
+		pagination.step = numberOfRows; 
+
+	}
+
+
+};
+
+
+var pagination = {
+	filteredData: new Array(),
+	step: 10,
+	current:0,
+	showButtons: function () {
+
+		var nextButton = $("#paginationNextButton");
+		var previousButton = $("#paginationPreviousButton");
+
+		if (this.current == 0){
+			previousButton.fadeOut(0);
+		} else {
+			previousButton.fadeIn(300);
+		}
+
+		if (this.current < this.filteredData.length){
+			nextButton.fadeIn(300);
+		} else {
+			nextButton.fadeOut(0);
+		}
+
+	},
+	initData: function () {
+		$('.dropdown-hidden').hide();
+		$('.dropdown-item').hide();
+		$('.dropdown-item-yellow').hide();
+		$('.dropdown-item-blue').hide();
+
+		$('.dropdown-deploy').click(function(){
+			$(this).parent().parent().find('.dropdown-item').show(200);
+			$(this).parent().parent().find('.dropdown-item-yellow').show(200);
+			$(this).parent().parent().find('.dropdown-item-blue').show(200);
+			$(this).parent().parent().find('.dropdown-hidden').show();
+			$(this).hide();
+			return false;
+		});
+		
+		$('.dropdown-hidden').click(function(){
+			$(this).parent().parent().find('.dropdown-item').hide(200);
+			$(this).parent().parent().find('.dropdown-item-yellow').hide(200);
+			$(this).parent().parent().find('.dropdown-item-blue').hide(200);
+			$(this).parent().parent().find('.dropdown-deploy').show();
+			$(this).parent().parent().find(this).hide();
+			return false;		
+		});
+	},
+	showData: function () {
+
+		layout.initDropdownLayout();
+
+		var resultsSchoolsDiv = $(".page-content-results-school");
+		resultsSchoolsDiv.empty();
+
+		this.showButtons();
+		
+		for (var i = this.current; i < this.filteredData.length; i++){
+    		if(i < this.current + this.step) {
+	    		var elem = this.filteredData[i];
+	    		var html = '<div class="container no-bottom"><div class="dropdown-menu"><a href="#" class="dropdown-deploy"><em class="left-dropdown bg-light"></em><span class="highlight bg-orange"><p style="display: inline; text-transform: lowercase; margin:15px; line-height:40px">' + elem.atime + '</p></span><p style="display: inline;">' + '&nbsp;' +  elem.dabreviada +'</p></a><a href="#" class="dropdown-hidden"><em class="left-dropdown bg-light"></em>      </a><a class="dropdown-item-blue bg-light">' + elem.dabreviada + '</a><a class="dropdown-item-yellow bg-light" style="text-transform: lowercase;">' + elem.atime +'</a><a class="dropdown-item-yellow bg-light" style="text-transform: lowercase;">' + elem.adist + '</a><a class="dropdown-item bg-light">' + elem.dgenerica + '</a><a class="dropdown-item bg-light">' + elem.direccion + '</a><a class="dropdown-item bg-light">' + elem.telefono + '</a><div class="dropdown-bottom-border"></div></div></div>';
+	    		
+	    		resultsSchoolsDiv.append( html );
+    		}
+			    		
+		}
+
+		this.initData();
+
+		resultsSchoolsDiv.show();
+		this.updateCounterPanel();
+
+	},
+	updateCounterPanel: function () {
+
+		var counterPanel = $("#page-content-results-header-counter");
+		var counter = this.current + this.step;
+		var txt = counter + " de " + this.filteredData.length;
+		counterPanel.text(txt);
+
+	},
+	next: function () {
+
+		this.current += this.step;
+		this.showData();
+
+	},
+	previous: function () {
+		this.current -= this.step;
+		this.showData();
+	} 
+};
+
+
 var distance = {
 
-	requestDistance: function() {
+	createCartoURL: function() {
 
-		var isPublicChecked = $("#form_checker_public").hasClass( "checked-v1" ) ? true : false;
-		var isPrivateChecked = $("#form_checker_private").hasClass( "checked-v1" ) ? true : false;
-		var cp = $("#form_input_cp").val();
+		var isPublicChecked = $("#formPublicSchoolChecker").hasClass( "checked-v1" ) ? true : false;
+		var isPrivateChecked = $("#formPrivateSchoolChecker").hasClass( "checked-v1" ) ? true : false;
+		var cp = $("#formPostalCodeInput").val();
 
 		var filter = {};
 		filter.cp = cp;
 		if(isPublicChecked && isPrivateChecked) {
-
+			filter.regimen = "2"
 		} else {
 			if (isPublicChecked) {
-				filter.regimen = "Púb.";
+				filter.regimen = "0";
 			} 
 			if (isPrivateChecked) {
-				filter.regimen = "Priv.";
+				filter.regimen = "1";
 			}
 		}
 
 		var localUrl = cartojs('http://decasaalcole.cartodb.com', filter);
+		return localUrl
 
+	},
+
+	requestDistance: function() {
+
+		
+		var localUrl = this.createCartoURL();
 
 
 		var defaultSettings = {
@@ -35,92 +166,52 @@ var distance = {
 		    		$("#status").fadeOut(); // will first fade out the loading animation
 					$("#preloader").delay(350).fadeOut("slow"); // will fade out the white DIV that covers the website.
 
-			    	$(".page-content-distance").hide();
-			    	var resultsDiv = $(".page-content-results");
+			    	$(".page-content-distance").hide(); // hides form
+			    	
 
-			    	var filteredData = new Array();
+			    	pagination.filteredData = new Array();
 			    	for (var i = 0; i < data.rows.length; i++){
 			    		var elem = data.rows[i];
 			    		var savedData = {};
 			    		savedData.localidad = elem.localidad;
 			    		savedData.cp = elem.cp;
-			    		savedData.despecific = elem.despecific;
-			    		savedData.adist = validation.formatDistance(elem.adist);
-			    		savedData.atime = validation.formatTime(elem.atime);
+			    		savedData.dabreviada = elem.dabreviada;
 			    		savedData.dgenerica = elem.dgenerica;
-			    		savedData.direccion = elem.direccion + ", " + elem.numero + ". " + elem.provincia;
+			    		savedData.adist = validation.formatDistance(elem.kms);
+			    		savedData.atime = validation.formatTime(elem.minutes);
+			    		savedData.direccion = elem.direccion + ", " + elem.numero + ". " + elem.localidad;
 			    		savedData.telefono = elem.telefono;
 
-
-			    		filteredData.push(savedData);
-
+			    		pagination.filteredData.push(savedData);
 
 			    	}
 
 			    	var tableNode = $("#distance_table_results");
-			    	var borrame = resultsDiv.html();
 
-			    	for (var i = 0; i < filteredData.length; i++){
-			    		if(i < 100) {
-				    		var elem = filteredData[i];
-				    		// var html = "<tr><td>" + elem.atime+ "</td><td>" + elem.adist + "</td><td>" + elem.despecific + "</td></tr>";
-				    		// tableNode.append( html );
-				    		 
-				    		// var html = '<div class="container no-bottom"><div class="dropdown-menu"><a href="#" class="dropdown-deploy"><em class="left-dropdown bg-light"></em><p style="display: inline; text-transform: lowercase;">' + elem.atime + '</p><p style="display: inline;">' + ' -- ' +  elem.despecific +'</p></a><a href="#" class="dropdown-hidden"><em class="left-dropdown bg-light"></em>Ocultar</a><a class="dropdown-item-yellow bg-light">' + elem.despecific + '</a><a class="dropdown-item-blue bg-light" style="text-transform: lowercase;">' + elem.atime +'</a><a class="dropdown-item-blue bg-light" style="text-transform: lowercase;">' + elem.adist + '</a><a class="dropdown-item bg-light">' + elem.dgenerica + '</a><a class="dropdown-item bg-light">' + elem.direccion + '</a><a class="dropdown-item bg-light">' + elem.telefono + '</a><div class="dropdown-bottom-border"></div></div></div>';
-				    		var html = '<div class="container no-bottom"><div class="dropdown-menu"><a href="#" class="dropdown-deploy"><em class="left-dropdown bg-light"></em><p style="display: inline; text-transform: lowercase;">' + elem.atime + '</p><p style="display: inline;">' + ' -- ' +  elem.despecific +'</p></a><a href="#" class="dropdown-hidden"><em class="left-dropdown bg-light"></em><span class="stat-background"><span class="stat-cleaner"></span><span class="percent green-minimal  p100"></span></span></a><a class="dropdown-item-yellow bg-light">' + elem.despecific + '</a><a class="dropdown-item-blue bg-light" style="text-transform: lowercase;">' + elem.atime +'</a><a class="dropdown-item-blue bg-light" style="text-transform: lowercase;">' + elem.adist + '</a><a class="dropdown-item bg-light">' + elem.dgenerica + '</a><a class="dropdown-item bg-light">' + elem.direccion + '</a><a class="dropdown-item bg-light">' + elem.telefono + '</a><div class="dropdown-bottom-border"></div></div></div>';
-				    		
-				    		resultsDiv.append( html );
-
-
-							// style="text-transform: lowercase;"
-				    		// <span class="stat-background"><span class="stat-cleaner"></span><span class="percent red-minimal  p20"></span></span>
-			    		}
-			    		
-			    	}
-
-			    	$('.dropdown-hidden').hide();
-					$('.dropdown-item').hide();
-					$('.dropdown-item-yellow').hide();
-					$('.dropdown-item-blue').hide();
-
-					$('.dropdown-deploy').click(function(){
-						$(this).parent().parent().find('.dropdown-item').show(200);
-						$(this).parent().parent().find('.dropdown-item-yellow').show(200);
-						$(this).parent().parent().find('.dropdown-item-blue').show(200);
-						$(this).parent().parent().find('.dropdown-hidden').show();
-						$(this).hide();
-						return false;
-					});
-					
-					$('.dropdown-hidden').click(function(){
-						$(this).parent().parent().find('.dropdown-item').hide(200);
-						$(this).parent().parent().find('.dropdown-item-yellow').hide(200);
-						$(this).parent().parent().find('.dropdown-item-blue').hide(200);
-						$(this).parent().parent().find('.dropdown-deploy').show();
-						$(this).parent().parent().find(this).hide();
-						return false;		
-					});
-
+			    	var resultsDiv = $(".page-content-results");
 			    	resultsDiv.show();
+
+			    	pagination.showData()
 
 			    },
 			    error: function (jqXHR, textStatus, errorThrown)
 			    {
 			    	$("#status").fadeOut(); // will first fade out the loading animation
 					$("#preloader").delay(350).fadeOut("slow"); // will fade out the white DIV that covers the website.
+
 			    	console.error("Distance App Error: ", errorThrown);
 			    	console.error("Distance App Error: ", textStatus);
 
-			    	var errorField = $("#form_field_error");
-			    	errorField.text("Error: " + textStatus + ". Inténtelo de nuevo");
-					errorField.show();
+			    	var errorField = $("#formAjaxError");
+			    	// errorField.text("Error: " + textStatus + ". Inténtelo de nuevo");
+					errorField.fadeIn(300);
 
 			    }
 			};
 
 		$("#status").show();
 		$("#preloader").show();
-	
+
 		$.ajax(defaultSettings);
 	}
 };
@@ -128,50 +219,23 @@ var distance = {
 
 var validation = {
 
-	validateRequest: function () {
-
-		var errorField = $("#form_field_error");
-		errorField.hide();
-
-		var cpText = $("#form_input_cp").val(); //.value()
-		if (cpText == null || cpText == "") {
-			errorField.text("Código Postal obligatorio");
-			errorField.fadeIn();
-		} else {
-			var isnum = /^\d+$/.test(cpText);
-			if (isnum) {
-				var cpLength = cpText.length;
-				if(cpLength != 5){
-					errorField.text("Longitud de código postal distinta de 5");
-					errorField.fadeIn();
-				} else {
-					distance.requestDistance();
-				}
-			} else {
-				errorField.text("Carácter incorrecto en código postal");
-				errorField.fadeIn();
-			}
-		}
-	},
-	formatTime: function(timeInSeconds){
-		var sec_num = parseInt(timeInSeconds, 10);
-	    var hours   = Math.floor(sec_num / 3600);
-	    var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
-	    var seconds = sec_num - (hours * 3600) - (minutes * 60);
+	formatTime: function(timeInMinutes){
+		var min_num = parseInt(timeInMinutes, 10);
+	    var hours   = Math.floor(min_num / 60);
+	    var minutes = Math.floor(min_num - (hours * 60));
+	    
 
 	    if (hours  == 0) {hours = null;}
 	    if (minutes == 0) {minutes = null;}
-	    if (seconds == 0) {seconds = null;}
 
 	    var time;
-	    if (!hours && !minutes && !seconds){
-	    	time = '0 seg'
+	    if (!hours && !minutes){
+	    	time = '0 min'
 	    } else {
 		    var textHour = hours ? hours + 'h ' : '';
 		    var textMin = minutes ? minutes + 'min ' : '';
-		    var textSec = seconds ? seconds + 'seg ' : '';
-
-		    time = textHour + textMin + textSec;  
+		   
+		    time = textHour + textMin;  
 		}
 	    return time;
 	},
