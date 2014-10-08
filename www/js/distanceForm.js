@@ -47,7 +47,7 @@ jQuery(document).ready(function($) {
 				var isnum = /^\d+$/.test(cpText);
 				if (isnum) {
 					var cpLength = cpText.length;
-					if(cpLength != 5){
+					if(cpLength < 4){
 						$(this).val($(this).attr('data-dummy'));	
 						$(this).focus();
 						$(this).addClass('fieldHasError');
