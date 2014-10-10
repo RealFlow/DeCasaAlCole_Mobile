@@ -1,5 +1,4 @@
 var $ = jQuery.noConflict(); 
-var formSubmitted = 'false';
 
 jQuery(document).ready(function($) {	
 
@@ -24,7 +23,6 @@ jQuery(document).ready(function($) {
 		
 	// submit form data starts	   
     function submitData(currentForm, formType){     
-		// formSubmitted = 'true';
 		distance.requestDistance();
 	};
 	// submit form data function starts	
@@ -62,7 +60,7 @@ jQuery(document).ready(function($) {
 					return false;
 				}
 			};			
-			if(formSubmitted == 'false' && i == $('#' + currentForm + ' .requiredField').length - 1){
+			if(i == $('#' + currentForm + ' .requiredField').length - 1){
 			 	submitData(currentForm, formType);
 			};			  
    		});		

@@ -1,5 +1,4 @@
 var $ = jQuery.noConflict(); 
-var formSubmitted = 'false';
 
 jQuery(document).ready(function($) {	
 
@@ -24,14 +23,13 @@ jQuery(document).ready(function($) {
 		
 	// submit form data starts	   
     function submitData(currentForm, formType){     
-		formSubmitted = 'true';
 		var formInput = $('#' + currentForm).serialize();	
 
 		var defaultSettings = {
 			url : $('#' + currentForm).attr('action'),
 			type: "POST",
 		    data : formInput,
-		    dataType: 'json',
+		    dataType: 'jsonp',
 		    success: function(data, textStatus, jqXHR)
 		    {
 
@@ -85,7 +83,7 @@ jQuery(document).ready(function($) {
 					return false;
 				};		
 			};			
-			if(formSubmitted == 'false' && i == $('#' + currentForm + ' .requiredField').length - 1){
+			if(i == $('#' + currentForm + ' .requiredField').length - 1){
 			 	submitData(currentForm, formType);
 			};			  
    		});		

@@ -1,35 +1,35 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="format-detection" content="telephone=no" />
-        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-        <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <meta name="msapplication-tap-highlight" content="no" />
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <meta name="msapplication-tap-highlight" content="no" />
 
-        <title>Distances</title>
+    <title>Distances</title>
 
-        <!-- Stylesheet Load -->
-        <link href="css/style.css"               rel="stylesheet" type="text/css">
-        <link href="css/framework-style.css"     rel="stylesheet" type="text/css">
-        <link href="css/framework.css"           rel="stylesheet" type="text/css">
-        <link href="css/bxslider.css"            rel="stylesheet" type="text/css">
-        <link href="css/swipebox.css"            rel="stylesheet" type="text/css">
-        <link href="css/icons.css"               rel="stylesheet" type="text/css">
-        <link href="css/retina.css"              rel="stylesheet" type="text/css" media="only screen and (-webkit-min-device-pixel-ratio: 2)" />
+    <!-- Stylesheet Load -->
+    <link href="css/style.css"               rel="stylesheet" type="text/css">
+    <link href="css/framework-style.css"     rel="stylesheet" type="text/css">
+    <link href="css/framework.css"           rel="stylesheet" type="text/css">
+    <link href="css/bxslider.css"            rel="stylesheet" type="text/css">
+    <link href="css/swipebox.css"            rel="stylesheet" type="text/css">
+    <link href="css/icons.css"               rel="stylesheet" type="text/css">
+    <link href="css/retina.css"              rel="stylesheet" type="text/css" media="only screen and (-webkit-min-device-pixel-ratio: 2)" />
 
 
-    </head>
-    <body>
-<!--         <div class="app">
-            <h1>Apache Cordova</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
-            </div>
-        </div> -->
+</head>
+<body>
 
+    <!-- <div class="app">
+        <h1>Apache Cordova</h1>
+        <div id="deviceready" class="blink">
+            <p class="event listening">Connecting to Device</p>
+            <p class="event received">Device is Ready</p>
+        </div>
+    </div> -->
 
     <div id="preloader">
         <div id="status">
@@ -40,99 +40,94 @@
         </div>
     </div>
 
+    <div class="all-elements">
 
+        <div id="sidebar" class="page-sidebar">
+            <div class="page-sidebar-scroll">
+                <div class="sidebar-header">
+                    <a href="#" class="delete-sidebar"></a>
+                    <img class="sidebar-logo" src="images/misc/logo.png" width="189" alt="img">
+                </div>
 
-<div class="all-elements">
-    
+                <p class="sidebar-separator">NAVEGACIÓN</p>
+                <a href="index.html" class="nav-item home-nav">                     INICIO      <em class="nav-onit"></em></a>
 
-    <div id="sidebar" class="page-sidebar">
-        <div class="page-sidebar-scroll">
-            <div class="sidebar-header">
-                <a href="#" class="delete-sidebar"></a>
-                <img class="sidebar-logo" src="images/misc/logo.png" width="189" alt="img">
+                <a href="contact.html" class="nav-item contact-nav no-border">      CONTACTO     <em class="nav-page"></em></a>
             </div>
-            
-            <p class="sidebar-separator">NAVEGACIÓN</p>
-            <a href="index.html" class="nav-item home-nav">                     INICIO      <em class="nav-onit"></em></a>
-           
-            <a href="contact.html" class="nav-item contact-nav no-border">      CONTACTO     <em class="nav-page"></em></a>
         </div>
-    </div>
-       
-    <div id="content" class="page-content">
 
-        <div class="page-header">
-            <p class="logo">
-                <img src="images/misc/logo.png" width="189">
-            </p>
-            <a href="#" class="deploy-sidebar"></a>
-        </div>
-        
-        <div id="page-content-main">
+        <div id="content" class="page-content">
 
-        <div class="page-content-distance container no-bottom">
+            <div class="page-header">
+                <p class="logo">
+                    <img src="images/misc/logo.png" width="189">
+                </p>
+                <a href="#" class="deploy-sidebar"></a>
+            </div>
 
-            <h1>Distancias</h1>
-            
-            <form class="contactForm" id="distanceForm" >
-                    <fieldset>
+            <div id="page-content-main">
 
-                        <div class="formValidationError" id="formPostalCodeInputErrorEmpty">
-                            <div class="small-notification red-notification">
-                                <p id="fieldErrorMessage">Código Postal obligatorio</p>
+                <div class="page-content-distance container no-bottom">
+
+                    <h1>Distancias</h1>
+
+                    <form class="contactForm" id="distanceForm" >
+                        <fieldset>
+
+                            <div class="formValidationError" id="formPostalCodeInputErrorEmpty">
+                                <div class="small-notification red-notification">
+                                    <p id="fieldErrorMessage">Código Postal obligatorio</p>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="formValidationError" id="formPostalCodeInputErrorLength">
-                            <div class="small-notification red-notification">
-                                <p id="fieldErrorMessage">Longitud de código postal distinta de 5</p>
+                            <div class="formValidationError" id="formPostalCodeInputErrorLength">
+                                <div class="small-notification red-notification">
+                                    <p id="fieldErrorMessage">Longitud de código postal distinta de 5</p>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="formValidationError" id="formPostalCodeInputErrorCharacter">
-                            <div class="small-notification red-notification">
-                                <p id="fieldErrorMessage">Carácter incorrecto en código postal</p>
+                            <div class="formValidationError" id="formPostalCodeInputErrorCharacter">
+                                <div class="small-notification red-notification">
+                                    <p id="fieldErrorMessage">Carácter incorrecto en código postal</p>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="formValidationError" id="formAjaxError">
-                            <div class="small-notification red-notification">
-                                <p id="fieldErrorMessage">Error en la conexión. Inténtelo de nuevo</p>
+                            <div class="formValidationError" id="formAjaxError">
+                                <div class="small-notification red-notification">
+                                    <p id="fieldErrorMessage">Error en la conexión. Inténtelo de nuevo</p>
+                                </div>
+                            </div>            
+
+                            <div class="formFieldWrap">
+                                <label class="field-title contactNameField">1. Selecciona tu código postal:<span>(obligatorio)</span></label>
+                                <input id="formPostalCodeInput" type="text" name="postalCodeNameField" value="" class="contactField requiredField requiredPostalCodeField" id="contactNameField" placeholder="46001"/>
                             </div>
-                        </div>            
-                        
-                        <div class="formFieldWrap">
-                            <label class="field-title contactNameField">1. Selecciona tu código postal:<span>(obligatorio)</span></label>
-                            <input id="formPostalCodeInput" type="text" name="postalCodeNameField" value="" class="contactField requiredField requiredPostalCodeField" id="contactNameField" placeholder="46001"/>
-                        </div>
-                        
-                        <div class="formFieldWrap">
-                            <label class="field-title contactNameField" for="schoolTypeNameField">2. Filtra por tipo de colegio</label>
-                             <a id="formPublicSchoolChecker" href="#" class="checker checkbox-v1 checked-v1">Público</a>
-                             <a id="formPrivateSchoolChecker" href="#" class="checker checkbox-v1 checked-v1">Privado</a>
-                        </div>
-                        
-                        <div class="formSubmitButtonErrorsWrap">
+
+                            <div class="formFieldWrap">
+                                <label class="field-title contactNameField" for="schoolTypeNameField">2. Filtra por tipo de colegio</label>
+                                <a id="formPublicSchoolChecker" href="#" class="checker checkbox-v1 checked-v1">Público</a>
+                                <a id="formPrivateSchoolChecker" href="#" class="checker checkbox-v1 checked-v1">Privado</a>
+                            </div>
+
+                            <div class="formSubmitButtonErrorsWrap">
 
                               <input type="submit" class="buttonWrap button-minimal fullscreen-button yellow-minimal contactSubmitButton" id="contactSubmitButton" value="ENVIAR" data-formId="distanceForm"/> 
 
-                        </div>
-                    </fieldset>
-                </form> 
-        </div>
+                          </div>
+                      </fieldset>
+                  </form> 
+              </div>
 
-        <div class="page-content-results">
-            <div id="page-content-results-header">
-                <a href="distance.html" class="button-minimal yellow-minimal no-bottom button-align-right" onclick='contact.validateForm()'>Nueva Consulta</a>
-                <p class="uppercase results-heading left-text minor-left-padding">Resultados</p>
-                <p id="page-content-results-header-counter" class="uppercase left-text minor-left-padding"></p>
+              <div class="page-content-results">
+                <div id="page-content-results-header">
+                    <a href="distance.html" class="button-minimal yellow-minimal no-bottom button-align-right" onclick='contact.validateForm()'>Nueva Consulta</a>
+                    <p class="uppercase results-heading left-text minor-left-padding">Resultados</p>
+                    <p id="page-content-results-header-counter" class="uppercase left-text minor-left-padding"></p>
+                </div> 
+
+                <div class="page-content-results-school"></div>    
             </div> 
-
-            <div class="page-content-results-school"></div>    
-        
-        </div> 
-
-    </div>
+        </div>
 
         <div class="footer">
             <a href="#" class="footer-facebook"></a>
@@ -144,39 +139,29 @@
             <em></em>
             
         </div>     
-    
-</div>
+    </div>
 
+    <script src="cordova.js" type="text/javascript" ></script>
+    <script src="js/distance.js" type="text/javascript"></script>
+    <script src="js/jquery-1.11.1.min.js" type="text/javascript"></script>   
+    <!--Page Scripts Load -->
+    <script src="js/snap.js"            type="text/javascript"></script>
+    <script src="js/hammer.js"          type="text/javascript"></script>   
+    <script src="js/jquery.swipebox.js" type="text/javascript"></script>
+    <script src="js/bxslider.js"        type="text/javascript"></script>
+    <script src="js/colorbox.js"        type="text/javascript"></script>
+    <script src="js/retina.js"          type="text/javascript"></script>
+    <script src="js/custom.js"          type="text/javascript"></script>
+    <script src="js/framework.js"       type="text/javascript"></script>
+    <script src="js/distanceForm.js"         type="text/javascript"></script>
+    <script src="js/mustache.js"       type="text/javascript"></script>
+    <script src="js/cartodb.js"       type="text/javascript"></script>
+    <script>
+        layout.adjustLayout();
 
-
-
-
-
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/distance.js"></script>
-        <script src="js/jquery-1.11.1.min.js"      type="text/javascript"></script>   
-        <!--Page Scripts Load -->
-        <script src="js/snap.js"            type="text/javascript"></script>
-        <script src="js/hammer.js"          type="text/javascript"></script>   
-        <script src="js/jquery-ui-min.js"   type="text/javascript"></script>
-        <script src="js/subscribe.js"       type="text/javascript"></script>
-        <script src="js/distanceForm.js"         type="text/javascript"></script>
-        <script src="js/jquery.swipebox.js" type="text/javascript"></script>
-        <script src="js/bxslider.js"        type="text/javascript"></script>
-        <script src="js/colorbox.js"        type="text/javascript"></script>
-        <script src="js/retina.js"          type="text/javascript"></script>
-        <script src="js/custom.js"          type="text/javascript"></script>
-        <script src="js/framework.js"       type="text/javascript"></script>
-        <script src="js/mustache.js"       type="text/javascript"></script>
-        <script src="js/cartodb.js"       type="text/javascript"></script>
-        <script>
-
-            layout.adjustLayout();
-
-            $(".page-content-results").hide();
-            $("#paginationNextButton").hide();
-            $("#paginationPreviousButton").hide();
-        </script>
- 
-    </body>
+        $(".page-content-results").hide();
+        $("#paginationNextButton").hide();
+        $("#paginationPreviousButton").hide();
+    </script>
+</body>
 </html>
