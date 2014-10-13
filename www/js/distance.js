@@ -232,6 +232,7 @@ var distance = {
 			    		savedData.dgenerica = elem.dgenerica;
 			    		savedData.adist = validation.formatDistance(elem.kms);
 			    		savedData.atime = validation.formatTime(elem.minutes);
+			    		savedData.atimeabreviada = validation.formatTime(elem.minutes, true);
 			    		savedData.direccion = elem.direccion + ", " + elem.numero + ". " + elem.localidad;
 			    		savedData.telefono = elem.telefono;
 
@@ -272,7 +273,7 @@ var distance = {
 
 var validation = {
 
-	formatTime: function(timeInMinutes){
+	formatTime: function(timeInMinutes, isAbreviated){
 		var min_num = parseInt(timeInMinutes, 10);
 	    var hours   = Math.floor(min_num / 60);
 	    var minutes = Math.floor(min_num - (hours * 60));
@@ -283,7 +284,10 @@ var validation = {
 
 	    var time;
 	    if (!hours && !minutes){
-	    	time = 'menos de 1 min'
+	    	if (isAbreviated)
+	    		time = '< 1 min'
+	    	else
+	    		time = 'menos de 1 min';
 	    } else {
 		    var textHour = hours ? hours + 'h ' : '';
 		    var textMin = minutes ? minutes + ' min ' : '';
