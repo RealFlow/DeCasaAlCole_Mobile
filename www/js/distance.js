@@ -1,3 +1,43 @@
+var config = {
+	isMobile: true
+	// isMobile: false
+};
+
+
+var device = {
+	init: function (){
+
+		if (config.isMobile) {
+			var attachFastClick = Origami.fastclick;
+			attachFastClick(document.body);
+		}
+	},
+	isNetworkAvailable: function () {
+
+		console.log("Getting Network status");
+	    var networkState = navigator.network.connection.type;
+	    console.log("Got Network status");
+
+	    var isConnected = false;
+
+		if (networkState != Connection.NONE)
+			isConnected = true;
+
+	    var states = {};
+            states[navigator.connection.UNKNOWN]  = 'Unknown connection';
+            states[navigator.connection.ETHERNET] = 'Ethernet connection';
+            states[navigator.connection.WIFI]     = 'WiFi connection';
+            states[navigator.connection.CELL_2G]  = 'Cell 2G connection';
+            states[navigator.connection.CELL_3G]  = 'Cell 3G connection';
+            states[navigator.connection.CELL_4G]  = 'Cell 4G connection';
+            states[navigator.connection.CELL]     = 'Cell generic connection';
+            states[navigator.connection.NONE]     = 'No network connection';
+
+        console.log("Network status: " + states[networkState]);
+ 		return isConnected;
+	}
+	
+};
 
 var layout = {
 
@@ -14,6 +54,14 @@ var layout = {
 		main.css("min-height", mainHeight);
 		// main.height(mainHeight);
 		this.mainlayoutHeight = mainHeight;
+	},
+	adjustLayoutIndex: function () {
+		
+		$(".intro-logo").css("max-height","50%");
+		$(".intro-logo").css("max-width","50%");
+		$(".intro-logo").css("display","block");
+		$(".intro-logo").css("margin","auto");
+		$(".intro-logo").css("vertical-align","middle");
 	},
 	initDropdownLayout: function () {
 		var rowDropdownContainer = 60;
@@ -105,7 +153,12 @@ var pagination = {
 
 		var counterPanel = $("#page-content-results-header-counter");
 		var counter = this.current + this.step;
-		var txt = counter + " de " + this.filteredData.length;
+
+		var txt;
+		if (this.filteredData.length == 0)
+			txt = "No existen resultados";
+		else
+			txt = counter + " de " + this.filteredData.length;
 		counterPanel.text(txt);
 
 	},
@@ -158,7 +211,7 @@ var distance = {
 			url : localUrl,
 			type: "GET",
 			    // data : formData,
-			    dataType: 'json',
+			    dataType: 'jsonp',
 			    success: function(data, textStatus, jqXHR)
 			    {
 
@@ -230,27 +283,27 @@ var validation = {
 
 	    var time;
 	    if (!hours && !minutes){
-	    	time = '0 min'
+	    	time = 'menos de 1 min'
 	    } else {
 		    var textHour = hours ? hours + 'h ' : '';
-		    var textMin = minutes ? minutes + 'min ' : '';
+		    var textMin = minutes ? minutes + ' min ' : '';
 		   
 		    time = textHour + textMin;  
 		}
 	    return time;
 	},
-	formatDistance: function(distanceInMeter) {
 
-		distanceInMeter = parseInt(distanceInMeter);
+
+	formatDistance: function(distanceInKm) {
+
+		distanceInKm = parseInt(distanceInKm);
 		var distance;
-		var isBiggerThanKM = Math.floor(distanceInMeter/1000); 
-		if ( !isBiggerThanKM ) {
-			distance = isBiggerThanKM + ' m';
+		if ( !distanceInKm ) {
+			distance = 'menos de 1 km';
 		} else {
-			var km = distanceInMeter / 1000;
-			var fixedKm = km.toFixed(1);
-			distance = fixedKm + ' km';
-			distance = distance.replace(".", ",");	
+			
+			distance = distanceInKm + ' km';
+			// distance = distance.replace(".", ",");	
 		}
 
 		return distance

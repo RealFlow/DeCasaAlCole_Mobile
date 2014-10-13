@@ -5,24 +5,20 @@ jQuery(document).ready(function($) {
 	$('#formSuccessMessageWrap').hide(0);
 	$('.formValidationError').fadeOut(0);
 	
-	// fields focus function starts
 	$('input[type="text"], input[type="password"], textarea').focus(function(){
 		if($(this).val() == $(this).attr('data-dummy')){
 			$(this).val('');
 		};	
 	});
-	// fields focus function ends
-		
-	// fields blur function starts
+
 	$('input, textarea').blur(function(){
     	if($(this).val() == ''){		    
 			$(this).val($(this).attr('data-dummy'));				
 		};			
 	});
-	// fields blur function ends
-		
-	// submit form data starts	   
-    function submitData(currentForm, formType){     
+	   
+    function submitData(currentForm, formType){ 
+
 		var formInput = $('#' + currentForm).serialize();	
 
 		var defaultSettings = {
@@ -44,19 +40,20 @@ jQuery(document).ready(function($) {
 		    }
 		};
 
-		$.ajax(defaultSettings);
-
-
-
-
-
-
-
-
-		// $.post($('#' + currentForm).attr('action'),formInput, function(data){			
-		// 	$('#' + currentForm).hide();
-		// 	$('#formSuccessMessageWrap').fadeIn(500);			
-		// });
+		
+		// FIXME: isNetworkAvailable() does not work
+		if (config.isMobile) {
+			// if (device.isNetworkAvailable()) {
+	    	if (true) {
+	    		$.ajax(defaultSettings);
+	    	} else {
+	    		hideError();
+	    		attachError(this);
+	    		$('#formNetworkError').fadeIn(300);
+	    	}
+    	} else {
+    		$.ajax(defaultSettings);
+    	}
 	};
 	// submit form data function starts	
 	// validate form function starts
@@ -64,7 +61,8 @@ jQuery(document).ready(function($) {
 		// hide any error messages starts
 	    $('.formValidationError').hide();
 		$('.fieldHasError').removeClass('fieldHasError');
-	    // hide any error messages ends	
+	    // hide any error messages end
+
 		$('#' + currentForm + ' .requiredField').each(function(i){		   	 
 			if($(this).val() == '' || $(this).val() == $(this).attr('data-dummy')){				
 				$(this).val($(this).attr('data-dummy'));	
@@ -88,18 +86,18 @@ jQuery(document).ready(function($) {
 			};			  
    		});		
 	};
-	// validate form function ends	
 	
-	// contact button function starts
-	$('#contactSubmitButton').click(function() {	
+	
+	
+	$('#contactSubmitButton').click(function() {
+		if (config.isMobile)
+			cordova.plugins.Keyboard.close();	
+
 		validateForm($(this).attr('data-formId'));	
 	    return false;		
 	});
-	// contact button function ends
+	
 	
 	
 	
 });
-/*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
-/*//////////////////// Document Ready Function Ends                                                                       */
-/*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/

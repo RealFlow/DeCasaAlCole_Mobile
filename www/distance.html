@@ -94,9 +94,15 @@
 
                             <div class="formValidationError" id="formAjaxError">
                                 <div class="small-notification red-notification">
-                                    <p id="fieldErrorMessage">Error en la conexión. Inténtelo de nuevo</p>
+                                    <p id="fieldErrorMessage">Error en la conexión</p>
                                 </div>
-                            </div>            
+                            </div>
+
+                            <div class="formValidationError" id="formNetworkError">
+                                <div class="small-notification red-notification">
+                                    <p id="fieldErrorMessage">Error en la red</p>
+                                </div>
+                            </div>              
 
                             <div class="formFieldWrap">
                                 <label class="field-title contactNameField">1. Selecciona tu código postal:<span>(obligatorio)</span></label>
@@ -142,8 +148,8 @@
     </div>
 
     <script src="cordova.js" type="text/javascript" ></script>
-    <script src="js/distance.js" type="text/javascript"></script>
-    <script src="js/jquery-1.11.1.min.js" type="text/javascript"></script>   
+    <script src="js/jquery-1.11.1.min.js" type="text/javascript"></script>
+    <script src='js/fastclick.js' type='application/javascript'></script>
     <!--Page Scripts Load -->
     <script src="js/snap.js"            type="text/javascript"></script>
     <script src="js/hammer.js"          type="text/javascript"></script>   
@@ -153,10 +159,13 @@
     <script src="js/retina.js"          type="text/javascript"></script>
     <script src="js/custom.js"          type="text/javascript"></script>
     <script src="js/framework.js"       type="text/javascript"></script>
+    <script src="js/distance.js" type="text/javascript"></script>
     <script src="js/distanceForm.js"         type="text/javascript"></script>
     <script src="js/mustache.js"       type="text/javascript"></script>
     <script src="js/cartodb.js"       type="text/javascript"></script>
     <script>
+
+        // device.init();
         layout.adjustLayout();
 
         $(".page-content-results").hide();
