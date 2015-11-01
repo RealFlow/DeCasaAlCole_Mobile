@@ -22,7 +22,6 @@ img {
 	margin:0px 20px;
 }
 
-
 .bxslider-wrapper{
 	margin-left:20px;
 	margin-right:20px;
@@ -487,4 +486,11 @@ img {
 
 .minor-left-padding {
 	padding-left: 20px
+}
+
+/* MAPA */
+
+#map {
+	height: 100%;
+	min-height: 400px;
 }
