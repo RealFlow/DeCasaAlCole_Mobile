@@ -17,5 +17,17 @@ var map = {
 			html += '<div clas="legElem"><div class="iconPin iconPinBlue"></div><div class="legElem">Código postal</div></div>';
 			html += '<div clas="legElem"><div class="iconPin iconPinRed"></div><div class="legElem">Colegio</div></div>';
 			$('#legend').html(html);
+	},
+	adjustLayout: function () {
+
+		var headerHeight = $('.page-header').height();
+		var footerHeight = $('.footer').height();
+		var windowHeight = $(window).height();
+		var marginTop = 10;
+		var marginBottom = 80;
+		var mapHeight = windowHeight - (headerHeight + footerHeight + marginTop + marginBottom);
+
+		var map = $('#map');
+		map.css("min-height", mapHeight);
 	}
 };
